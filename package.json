@@ -1,0 +1,31 @@
+{
+  "name": "generator-minerva",
+  "version": "0.0.1",
+  "description": "Scaffolds out a boilerplate for front-end development team at The Economist",
+  "homepage": "https://github.com/the-economist-editorial/generator-minerva",
+  "author": {
+    "name": "Angelo Repole", 
+    "email" : "angelorepole@economist.com"
+  },
+  "main": "app/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/the-economist-editorial/generator-minerva.git"
+  },
+  "dependencies": {
+    "yeoman-generator": "~0.13.1"
+  },
+  "peerDependencies": {
+    "yo": ">=1.0.0-rc.1.1",
+  },
+  "engines": {
+    "node": ">=0.8.0",
+    "npm": ">=1.2.10"
+  },
+  "licenses": [
+    {
+      "type": "BSD"
+    }
+  ],
+  "private": true,
+}
