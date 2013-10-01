@@ -112,8 +112,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-clean');
 
-  grunt.registerTask('production', ['concat', 'uglify', 'sass:dist', 'clean']);
-  grunt.registerTask('compile', ['sass:dev', 'handlebars', 'watch']);
+  // Compile sass and handlebars on the fly.
+  grunt.registerTask('default', ['sass:dev', 'handlebars', 'watch']);
+
   // Unit Testing Task
-  grunt.registerTask('test', ['jasmine', 'jshint']);
+  grunt.registerTask('getready', ['jasmine', 'jshint']);
+
+  // Run this task when the code is ready for production.
+  grunt.registerTask('production', ['concat', 'uglify', 'sass:dist', 'clean']);
 };
