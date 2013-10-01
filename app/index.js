@@ -29,7 +29,6 @@ EdiGenerator.prototype.askFor = function askFor() {
 
   this.prompt(prompts, function (props) {
     this.projectName = props.projectName;
-
     cb();
   }.bind(this));
 };
