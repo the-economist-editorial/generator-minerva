@@ -2,21 +2,11 @@ module.exports = function(grunt) {
 
   // Project configuration.
   grunt.initConfig({
-    // Metadata.{% if (package_json) { %}
     pkg: grunt.file.readJSON('package.json'),
-    concat: {
-      dist: {
-        src: ['js/**/*.js', '!js/init.min.js', '!js/tests/*.js'],
-        dest: 'js/concat.js'
-      }
+    prepare: {
+      html: 'index.html'
     },
-    uglify: {
-      dist: {
-        src: 'js/concat.js',
-        dest: 'js/init.min.js'
-      }
-    },
-   watch: {
+    watch: {
       sass: {
         files: ['css/sass/**/*.{scss,sass}',  '../../css/editorial.scss'],
         tasks: ['sass:dev']
@@ -97,9 +87,6 @@ module.exports = function(grunt) {
       options: {
         specs: ['js/tests/*tests.js', '../../js/tests/*tests.js'],
       }
-    },
-   clean: {
-      clean: ["js/concat.js"]
     }
   });
 
@@ -110,7 +97,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-handlebars-compiler');
   grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-usemin');
 
   // Compile sass and handlebars on the fly.
   grunt.registerTask('default', ['sass:dev', 'handlebars', 'watch']);
@@ -119,5 +106,5 @@ module.exports = function(grunt) {
   grunt.registerTask('getready', ['jasmine', 'jshint']);
 
   // Run this task when the code is ready for production.
-  grunt.registerTask('production', ['concat', 'uglify', 'sass:dist', 'clean']);
+  grunt.registerTask('production', ['prepare', 'concat', 'uglify', 'sass:dist']);
 };
