@@ -19,9 +19,6 @@ util.inherits(EdiGenerator, yeoman.generators.Base);
 EdiGenerator.prototype.askFor = function askFor() {
   var cb = this.async();
 
-  // have Yeoman greet the user.
-  console.log(this.yeoman);
-
   var prompts = [{
     name: 'projectName',
     message: 'What\'s the name of the project?'
@@ -34,12 +31,6 @@ EdiGenerator.prototype.askFor = function askFor() {
 };
 
 EdiGenerator.prototype.app = function app() {
-  this.mkdir('css');
-  this.mkdir('css/sass');
-  this.mkdir('js');
-  this.mkdir('js/tpl');
-  this.mkdir('js/tpl/handlebars');
-  this.mkdir('js/tests');
   this.copy('css/style.css', 'css/style.css');
   this.copy('css/sass/style.scss', 'css/sass/style.scss');
   this.copy('js/init.js', 'js/init.js');
