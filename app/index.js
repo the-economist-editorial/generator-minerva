@@ -17,7 +17,7 @@ var EdiGenerator = module.exports = function EdiGenerator(args, options, config)
   });
   
   this.on('dependenciesInstalled', function() {
-    this.spawnCommand('grunt', ['git_init']);
+    this.spawnCommand('grunt', ['shell']);
   });
 
   this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
