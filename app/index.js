@@ -8,14 +8,14 @@ var EdiGenerator = module.exports = function EdiGenerator(args, options, config)
   yeoman.generators.Base.apply(this, arguments);
 
   this.on('end', function () {
-    this.installDependencies({ 
+    this.installDependencies({
       skipInstall: options['skip-install'],
       callback: function() {
         this.emit('dependenciesInstalled');
-      }.bind(this);
+      }.bind(this)
     });
   });
-  
+
   this.on('dependenciesInstalled', function() {
     this.spawnCommand('grunt', ['shell']);
   });
