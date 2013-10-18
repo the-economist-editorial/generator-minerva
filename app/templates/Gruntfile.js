@@ -126,16 +126,21 @@ module.exports = function(grunt) {
     fs.writeFileSync(jsPath, js);
     return true;
   });
-
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-sass');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-handlebars-compiler');
-  grunt.loadNpmTasks('grunt-contrib-jasmine');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-usemin');
-
+  
+  var npmTasks = [
+     'grunt-contrib-concat',
+     'grunt-contrib-uglify',
+     'grunt-sass',
+     'grunt-contrib-watch',
+     'grunt-handlebars-compiler',
+     'grunt-contrib-jasmine',
+     'grunt-contrib-jshint',
+     'grunt-usemin'];
+     
+  var i, len = npmTasks.length;
+  for (i = 0; i < len; i++) {
+     grunt.loadNpmTasks(npmTasks[i]);
+  }
 
   // Compile sass and handlebars on the fly.
   grunt.registerTask('default', ['sass:dev', 'handlebars', 'watch']);
