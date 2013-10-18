@@ -13,6 +13,6 @@ results
 
 npm-debug.log
 
-.Ds_Store
+.DS_Store
 *.swp
 *~
