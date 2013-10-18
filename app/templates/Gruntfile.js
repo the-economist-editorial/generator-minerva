@@ -6,6 +6,14 @@ module.exports = function(grunt) {
     useminPrepare: {
       html: 'index.html'
     },
+    shell: {
+      listFolders: {
+        options: {
+          stdout: true
+        },
+        command: 'git init'
+      }
+    },
     watch: {
       sass: {
         files: ['css/sass/**/*.{scss,sass}',  '../../css/editorial.scss'],
@@ -135,7 +143,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-usemin');
-
+  grunt.loadNpmTasks('grunt-shell');
 
   // Compile sass and handlebars on the fly.
   grunt.registerTask('default', ['sass:dev', 'handlebars', 'watch']);
