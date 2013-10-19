@@ -8,7 +8,7 @@ module.exports = function(grunt) {
     },
     githooks: {
       all: {
-        'pre-commit': 'getready'
+        'pre-commit': 'jshint'
       }
     },
     shell: {
