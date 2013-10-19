@@ -6,6 +6,11 @@ module.exports = function(grunt) {
     useminPrepare: {
       html: 'index.html'
     },
+    githooks: {
+      all: {
+        'pre-commit': 'getready'
+      }
+    },
     shell: {
       listFolders: {
         options: {
@@ -111,7 +116,7 @@ module.exports = function(grunt) {
       }
     },
     csstojs: {
-      target: ['css/style.css', 'js/css.js']  
+      target: ['css/style.css', 'js/css.js']
     }
   });
 
@@ -144,6 +149,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-usemin');
   grunt.loadNpmTasks('grunt-shell');
+  grunt.loadNpmTasks('grunt-githooks');
 
   // Compile sass and handlebars on the fly.
   grunt.registerTask('default', ['sass:dev', 'handlebars', 'watch']);
