@@ -154,8 +154,11 @@ module.exports = function(grunt) {
   // Compile sass and handlebars on the fly.
   grunt.registerTask('default', ['sass:dev', 'handlebars', 'watch']);
 
-  // Unit Testing Task
+  // Unit tests.
   grunt.registerTask('getready', ['jasmine', 'jshint']);
+
+  // Git tasks.
+  grunt.registerTask('git', ['shell', 'githooks']);
 
   // Run this task when the code is ready for production.
   grunt.registerTask('production', ['sass:dist',  'csstojs', 'useminPrepare', 'concat',  'concat:dist', 'uglify']);
