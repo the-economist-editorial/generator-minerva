@@ -8,7 +8,16 @@ var EdiGenerator = module.exports = function EdiGenerator(args, options, config)
   yeoman.generators.Base.apply(this, arguments);
 
   this.on('end', function () {
-    this.installDependencies({ skipInstall: options['skip-install'] });
+    this.installDependencies({
+      skipInstall: options['skip-install'],
+      callback: function() {
+        this.emit('dependenciesInstalled');
+      }.bind(this)
+    });
+  });
+
+  this.on('dependenciesInstalled', function() {
+    this.spawnCommand('grunt', ['git']);
   });
 
   this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));

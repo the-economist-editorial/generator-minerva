@@ -6,6 +6,19 @@ module.exports = function(grunt) {
     useminPrepare: {
       html: 'index.html'
     },
+    githooks: {
+      all: {
+        'pre-commit': 'jshint'
+      }
+    },
+    shell: {
+      listFolders: {
+        options: {
+          stdout: true
+        },
+        command: 'git init'
+      }
+    },
     watch: {
       sass: {
         files: ['css/sass/**/*.{scss,sass}',  '../../css/editorial.scss'],
@@ -103,7 +116,7 @@ module.exports = function(grunt) {
       }
     },
     csstojs: {
-      target: ['css/style.css', 'js/css.js']  
+      target: ['css/style.css', 'js/css.js']
     }
   });
 
@@ -135,13 +148,17 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-usemin');
-
+  grunt.loadNpmTasks('grunt-shell');
+  grunt.loadNpmTasks('grunt-githooks');
 
   // Compile sass and handlebars on the fly.
   grunt.registerTask('default', ['sass:dev', 'handlebars', 'watch']);
 
-  // Unit Testing Task
+  // Unit tests.
   grunt.registerTask('getready', ['jasmine', 'jshint']);
+
+  // Git tasks.
+  grunt.registerTask('git', ['shell', 'githooks']);
 
   // Run this task when the code is ready for production.
   grunt.registerTask('production', ['sass:dist',  'csstojs', 'useminPrepare', 'concat',  'concat:dist', 'uglify']);
