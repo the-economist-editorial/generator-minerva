@@ -133,7 +133,7 @@ module.exports = function(grunt) {
       return false;
     }
     var cssStr = css.split("\n").map(function(l){return '"' + l + '\\n"';}).join(" + \n");
-    var js = "(function() {var css = " + cssStr + ", head = document.getElementsByTagName('head')[0], style = document.createElement('style'); style.appendChild(document.createTextNode(css)); head.appendChild(style);})();"
+    var js = "(function() { var css = " + cssStr + ", head = document.getElementsByTagName('head')[0], style = document.createElement('style'); style.setAttribute('type', 'text/css'); var nodeStyle = document.createTextNode(css); if (style.stylesheet) { style.styleSheet.cssText = nodeStyle.toString(); } else { style.appendChild(nodeStyle); }; head.appendChild(style);})();";
 
     grunt.log.writeln("Conversion completed, js file created.");
     fs.writeFileSync(jsPath, js);
