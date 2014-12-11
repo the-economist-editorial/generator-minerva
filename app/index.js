@@ -40,6 +40,8 @@ EdiGenerator.prototype.askFor = function askFor() {
 };
 
 EdiGenerator.prototype.app = function app() {
+  this.copy('node_modules/', 'node_modules/');
+  this.copy('sites/', 'sites/');
   this.copy('css/style.css', 'css/style.css');
   this.copy('css/sass/style.scss', 'css/sass/style.scss');
   this.copy('js/init.js', 'js/init.js');
