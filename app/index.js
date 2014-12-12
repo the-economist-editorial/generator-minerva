@@ -31,19 +31,25 @@ EdiGenerator.prototype.askFor = function askFor() {
   var prompts = [{
     name: 'projectName',
     message: 'What\'s the name of the project?'
+  },
+  {
+    name: 'projectFolder',
+    message: 'Please provide a project folder name (will be also used for widget tag reference, e.g. "ec-slideshow-suburbia"):'
   }];
 
   this.prompt(prompts, function (props) {
     this.projectName = props.projectName;
+    this.projectFolder = props.projectFolder;
     cb();
   }.bind(this));
 };
 
 EdiGenerator.prototype.app = function app() {
-  this.copy('node_modules/', 'node_modules/');
-  this.copy('sites/', 'sites/');
+  this.copy('node_modules/grunt-collection/package.json', 'node_modules/grunt-collection/package.json');
+  this.directory('sites/', 'sites/');
   this.copy('css/style.css', 'css/style.css');
   this.copy('css/sass/style.scss', 'css/sass/style.scss');
+  this.copy('css/var.scss', 'css/var.scss');
   this.copy('js/init.js', 'js/init.js');
   this.copy('js/tpl/template.js', 'js/tpl/template.js');
   this.copy('js/tpl/handlebars/tpl.handlebars', 'js/tpl/handlebars/tpl.handlebars');

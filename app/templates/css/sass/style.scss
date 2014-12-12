@@ -1,1 +1,23 @@
 @import "../../css/main";
+
+// Code belowe just for example, mixin, variables, etc. should be placed on ../var.scss
+// Sprite (Prev buttons example)
+// .prev {
+//   // Use the sprite
+//   @include ec-slideshow-sprite();
+//   // Posizioning the sprite
+//   background-position: -38px -22px;
+// }
+// ---------------------------
+// respond-to mixin example
+// li {
+//   display: inline-block;
+//   @include respond-to('mobilePortrait'){
+//     display: inline-block;
+//   }
+//   @include respond-to('mobileLandscape','lowResolution'){
+//     display: block;
+//     height: 60px;
+//     margin-bottom: $mainPadding;
+//   }
+// }
