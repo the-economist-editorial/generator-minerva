@@ -1,10 +1,10 @@
 module.exports = function(grunt) {
-   var fs = require('fs');
+  var fs = require('fs');
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     useminPrepare: {
-      html: 'index.html'
+      html: 'partials/widgethead.handlebars'
     },
     githooks: {
       all: {
@@ -34,7 +34,7 @@ module.exports = function(grunt) {
     },
     concat: {
       dist: {
-        src: ['js/css.js', 'js/init.min.js'],
+        src: ['js/css.js', 'js/init.js'],
         dest: 'js/init.min.js',
       },
     },
@@ -199,6 +199,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-collection');
 
   // Compile sass and handlebars on the fly.
+
   grunt.registerTask('default', ['sass:dev', 'handlebars', 'browserSync', 'watch']);
 
    // Unit tests.
@@ -212,5 +213,6 @@ module.exports = function(grunt) {
   grunt.registerTask('git', ['shell', 'githooks']);
 
   // Run this task when the code is ready for production.
-  grunt.registerTask('production', ['sass:dist',  'csstojs', 'useminPrepare', 'concat',  'concat:dist', 'uglify', 'robFix']);
+  //, 'concat:dist'
+  grunt.registerTask('production', ['sass:dist',  'csstojs', 'useminPrepare', 'concat', 'concat:dist', 'uglify', 'robFix']);
 };
