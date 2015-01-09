@@ -4,6 +4,9 @@ $cdnversion: "0.0.1";
 //$cdnHost: "(<YourIPAddress>|localhost):3000/projects";
 // CDN host/path
 $cdnHost: "cdn.static-economist.com";
+// Vars
+// Example of var 
+$spacer: 20px;
 // Note: helper mixin will be moved asap to a shared folder on Minerva
 // Example of CDN variables use trought ec-sprite mixing
 @mixin ec-sprite(){

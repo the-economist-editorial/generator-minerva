@@ -4,8 +4,8 @@
   "description": "Scaffolds out a boilerplate for front-end development team at The Economist",
   "homepage": "https://github.com/the-economist-editorial/generator-minerva",
   "author": {
-    "name": "Angelo Repole", 
-    "email" : "angelorepole@economist.com"
+    "name": "Angelo Repole",
+    "email": "angelorepole@economist.com"
   },
   "main": "app/index.js",
   "repository": {

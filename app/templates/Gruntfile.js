@@ -1,10 +1,10 @@
 module.exports = function(grunt) {
-   var fs = require('fs');
+  var fs = require('fs');
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     useminPrepare: {
-      html: 'index.html'
+      html: 'partials/widgethead.handlebars'
     },
     githooks: {
       all: {
@@ -68,10 +68,10 @@ module.exports = function(grunt) {
     browserSync: {
         dev: {
             bsFiles: {
-                src : ['css/style.css', 'js/init.js', 'templates/*.*', 'index.html','public/*.*']
+              src : ['css/style.css', 'js/*.*', 'public/*.*', 'partials/*.*', 'js/tpl/template.js' ]
             },
             options: {
-                watchTask: true // < VERY important
+              watchTask: true // < VERY important
             }
         }
     },
@@ -177,7 +177,7 @@ module.exports = function(grunt) {
     }
     
     grunt.log.writeln("File readed...");
-    grunt.log.writeln(initMin);
+    //grunt.log.writeln(initMin);
     
     var before = initMin;
     initMin.replace('c.styleSheet?c.styleSheet.cssText=d.toString():c.appendChild(d),', 'c.styleSheet?c.styleSheet.cssText=a:c.appendChild(d),');
@@ -199,6 +199,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-collection');
 
   // Compile sass and handlebars on the fly.
+
   grunt.registerTask('default', ['sass:dev', 'handlebars', 'browserSync', 'watch']);
 
    // Unit tests.
@@ -212,5 +213,5 @@ module.exports = function(grunt) {
   grunt.registerTask('git', ['shell', 'githooks']);
 
   // Run this task when the code is ready for production.
-  grunt.registerTask('production', ['sass:dist',  'csstojs', 'useminPrepare', 'concat',  'concat:dist', 'uglify', 'robFix']);
+  grunt.registerTask('production', ['sass:dist',  'csstojs', 'useminPrepare', 'concat', 'concat:dist', 'uglify', 'robFix']);
 };

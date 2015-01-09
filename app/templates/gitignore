@@ -2,7 +2,6 @@
 .tmp
 .sass-cache
 dist
-node_modules
 sites
 bower_components
 *.sublime-workspace

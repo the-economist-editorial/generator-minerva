@@ -34,12 +34,29 @@ EdiGenerator.prototype.askFor = function askFor() {
   },
   {
     name: 'projectFolder',
-    message: 'Please provide a project folder name (will be also used for widget tag reference, e.g. "ec-slideshow-suburbia"):'
+    message: 'Please provide a project folder name (will be also used like NS for widget tag reference, e.g. "ec-slideshow-suburbia"):'
+  },
+  {
+    name: 'handlebars',
+    message: 'Do you need handlebars? (y/n)'
+  },
+  {
+    name: 'graphicLibrary',
+    type: "list",
+    message: 'Choose a graphic Library:',
+    choices: [
+      { name: 'None', value: null, checked: true },
+      { name: 'Raphael', value: 'r' },
+      { name: 'D3', value: 'd' },
+      { name: 'Highchart', value: 'h' }
+    ]
   }];
 
   this.prompt(prompts, function (props) {
     this.projectName = props.projectName;
     this.projectFolder = props.projectFolder;
+    this.handlebars = props.handlebars;
+    this.graphicLibrary = props.graphicLibrary;
     cb();
   }.bind(this));
 };
@@ -49,12 +66,16 @@ EdiGenerator.prototype.app = function app() {
   this.directory('sites/', 'sites/');
   this.copy('css/style.css', 'css/style.css');
   this.copy('css/sass/style.scss', 'css/sass/style.scss');
-  this.copy('css/var.scss', 'css/var.scss');
+  this.copy('css/sass/vars.scss', 'css/sass/vars.scss');
   this.copy('js/init.js', 'js/init.js');
-  this.copy('js/tpl/template.js', 'js/tpl/template.js');
-  this.copy('js/tpl/handlebars/tpl.handlebars', 'js/tpl/handlebars/tpl.handlebars');
+  if(this.handlebars=='y'){
+    this.copy('js/tpl/template.js', 'js/tpl/template.js');
+    this.copy('js/tpl/handlebars/tpl.handlebars', 'js/tpl/handlebars/' + this.projectFolder + '.handlebars');
+  }
   this.copy('js/tests/tests.js', 'js/tests/tests.js');
-  this.copy('index.html', 'index.html');
+  this.copy('partials/widgetbody.handlebars', 'partials/widgetbody.handlebars');
+  this.copy('partials/widgetexternal.handlebars', 'partials/widgetexternal.handlebars');
+  this.copy('partials/widgethead.handlebars', 'partials/widgethead.handlebars');
   this.copy('_package.json', 'package.json');
   this.copy('_bower.json', 'bower.json');
   this.copy('Gruntfile.js', 'Gruntfile.js');

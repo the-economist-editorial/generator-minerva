@@ -3,7 +3,21 @@
 // Comment before production
 @import "../../css/main";
 
-// Code belowe just for example
+.mnv-<%= projectFolder %> {
+  // Write you css inside this namespace so they will not conflict with other css
+  background: #f1f1f1;
+  padding: $spacer;
+  margin: $spacer*2;
+  ul {
+    padding-top: $spacer;
+    li {
+      margin-bottom: $spacer;
+      border-bottom: solid 1px #CCC;
+    }    
+  } 
+}
+
+// Code below just for example
 // Sprite (Prev buttons example)
 // .prev {
 //   // Use the sprite
@@ -21,6 +35,6 @@
 //   @include respond-to('mobileLandscape','lowResolution'){
 //     display: block;
 //     height: 60px;
-//     margin-bottom: $mainPadding;
+//     margin-bottom: $spacer;
 //   }
 // }
