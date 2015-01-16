@@ -2,12 +2,15 @@
 /* Script below just for handlebars example */
 $(document).ready(function(){
   var tmp = Handlebars.templates['<%= projectFolder %>'];
-  $('#<%= projectFolder %>-CUSTOMSUFFIXHERE').html(tmp({
-    list: [
-      { label: 'First li element' },
-      { label: 'Second li element' }
-    ]
-  }));
+  <% for(i=0;i<instances;i++) { %>
+    $('#<%= projectFolder %>-<%= i %>').html(tmp({
+      title: 'Instance <%= i %> of your widget',
+      list: [
+        { label: 'First li element' },
+        { label: 'Second li element' }
+      ]
+    }));
+    <% } %>
 });
 <% } %>
 <% if (handlebars == "n") { %>

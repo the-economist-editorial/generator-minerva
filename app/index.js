@@ -30,15 +30,26 @@ EdiGenerator.prototype.askFor = function askFor() {
 
   var prompts = [{
     name: 'projectName',
-    message: 'What\'s the name of the project?'
+    message: 'What\'s the name of the project? (e.g.: Slideshow)'
   },
   {
-    name: 'projectFolder',
-    message: 'Please provide a project folder name (will be also used like NS for widget tag reference, e.g. "ec-slideshow-suburbia"):'
+    name: 'projectDescription',
+    message: 'Description:'
+  },
+  {
+    name: 'instances',
+    message: 'How many widget instances for test purpose?',
+    default: 1,
+    validate: function(input){
+      // Check if is integer
+      input = parseInt(input);
+      return (typeof input==='number' && (input%1)===0) || 'Please provide an integer';
+    }
   },
   {
     name: 'handlebars',
-    message: 'Do you need handlebars? (y/n)'
+    message: 'Do you need handlebars? (y/n)',
+    defaut: 'n'
   },
   {
     name: 'graphicLibrary',
@@ -53,8 +64,12 @@ EdiGenerator.prototype.askFor = function askFor() {
   }];
 
   this.prompt(prompts, function (props) {
+    this.suffix = 'ec-';
     this.projectName = props.projectName;
-    this.projectFolder = props.projectFolder;
+    this.projectDescription = props.projectDescription;
+    this.ns = this.suffix + this._.slugify(this.projectName);
+    this.projectFolder = this.ns;
+    this.instances = props.instances;
     this.handlebars = props.handlebars;
     this.graphicLibrary = props.graphicLibrary;
     cb();
@@ -78,5 +93,6 @@ EdiGenerator.prototype.app = function app() {
   this.copy('partials/widgethead.handlebars', 'partials/widgethead.handlebars');
   this.copy('_package.json', 'package.json');
   this.copy('_bower.json', 'bower.json');
+  this.copy('_minerva.json', 'minerva.json');
   this.copy('Gruntfile.js', 'Gruntfile.js');
 };

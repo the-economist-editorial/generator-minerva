@@ -42,7 +42,8 @@ module.exports = function(grunt) {
       options: {
         mangle: {
           except: ['mnv']
-        }
+        },
+        wrap: "<%= ns %>"
       }
     },
     sass: {
