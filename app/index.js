@@ -30,11 +30,26 @@ EdiGenerator.prototype.askFor = function askFor() {
 
   var prompts = [{
     name: 'projectName',
-    message: 'What\'s the name of the project? (e.g.: Slideshow)'
+    message: 'What\'s the name of the project? (e.g.: Slideshow - Uppercase, Camelcase, no space)'
   },
   {
     name: 'projectDescription',
-    message: 'Description:'
+    message: 'Description of the widget:'
+  },
+  {
+    name: 'bundleName',
+    message: 'Provide a bundle name related to the content or custom application (e.g.: UKElection2015 - Camelcase, no space):'
+  },
+  {
+    name: 'bundleProvider',
+    type: "list",
+    message: 'Choose the data provider:',
+    choices: [
+      { name: 'None', value: null, checked: true },
+      { name: 'In bundle (JS var)', value: 'inbundle' },
+      { name: 'JSON file', value: 'json' },
+      { name: 'JSONP file', value: 'jsonp' }
+    ]
   },
   {
     name: 'instances',
@@ -64,12 +79,16 @@ EdiGenerator.prototype.askFor = function askFor() {
   }];
 
   this.prompt(prompts, function (props) {
-    this.suffix = 'ec-';
+    this.suffix = 'ec';
     this.projectName = props.projectName;
     this.projectDescription = props.projectDescription;
-    this.ns = this.suffix + this._.slugify(this.projectName);
+    this.jsns = this.suffix + this.projectName;
+    this.ns = this.suffix + '-' + this._.slugify(this.projectName);
+    //TODO Change this reading the real name of the folder
     this.projectFolder = this.ns;
     this.instances = props.instances;
+    this.bundleName = props.bundleName;
+    this.bundleProvider = props.bundleProvider;
     this.handlebars = props.handlebars;
     this.graphicLibrary = props.graphicLibrary;
     cb();
@@ -78,14 +97,24 @@ EdiGenerator.prototype.askFor = function askFor() {
 
 EdiGenerator.prototype.app = function app() {
   this.copy('node_modules/grunt-collection/package.json', 'node_modules/grunt-collection/package.json');
-  this.directory('sites/', 'sites/');
-  this.copy('css/style.css', 'css/style.css');
-  this.copy('css/sass/style.scss', 'css/sass/style.scss');
-  this.copy('css/sass/vars.scss', 'css/sass/vars.scss');
+  var assetFolder = 'sites/default/files/external/minerva_assets'; 
+  this.mkdir( assetFolder );
+  this.directory('css','css');
+  //Data folder and files
+  var ExternalSimulationDataFolder = 'sites/default/files/external/minerva_data/' + this.ns + '/' + this.bundleName + '001';
+  this.mkdir( ExternalSimulationDataFolder );
+  this.directory('data/', 'data/');
+  this.write( ExternalSimulationDataFolder + '/data-jsonp.json', this.jsns + 'Callback();' );
+
+  //Tmp folder
+  this.directory('tmp/', 'tmp/');
+  this.copy('tmp/concat-critical.css', 'tmp/concat-critical.css');
+
+  this.copy('js/config.js', 'js/config.js');
   this.copy('js/init.js', 'js/init.js');
   if(this.handlebars=='y'){
     this.copy('js/tpl/template.js', 'js/tpl/template.js');
-    this.copy('js/tpl/handlebars/tpl.handlebars', 'js/tpl/handlebars/' + this.projectFolder + '.handlebars');
+    this.copy('js/tpl/handlebars/tpl.handlebars', 'js/tpl/handlebars/' + this.ns + '.handlebars');
   }
   this.copy('js/tests/tests.js', 'js/tests/tests.js');
   this.copy('partials/widgetbody.handlebars', 'partials/widgetbody.handlebars');
@@ -93,6 +122,6 @@ EdiGenerator.prototype.app = function app() {
   this.copy('partials/widgethead.handlebars', 'partials/widgethead.handlebars');
   this.copy('_package.json', 'package.json');
   this.copy('_bower.json', 'bower.json');
-  this.copy('_minerva.json', 'minerva.json');
+  this.copy('_config.json', 'config.json');
   this.copy('Gruntfile.js', 'Gruntfile.js');
 };

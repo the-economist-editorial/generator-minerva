@@ -3,7 +3,7 @@
 // Comment before production
 @import "../../css/main";
 
-.mnv-<%= projectFolder %> {
+.mnv-<%= ns %> {
   // Write you css inside this namespace so they will not conflict with other css
   background: #f1f1f1;
   padding: $spacer;

@@ -1,9 +1,0 @@
-{
-  "name": "<%= projectName %>",
-  "ns": "<%= ns %>",
-  "description": "<%= projectDescription %>",
-  "version": {
-    "asset": "0.1.0",
-    "core": "0.1.0"
-  }
-}

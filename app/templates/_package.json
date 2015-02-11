@@ -1,5 +1,13 @@
 {
   "name": "<%= projectName %>",
+  "ns": {
+    "js": "<%= jsns %>",
+    "css": "<%= ns %>",
+    "folder": "<%= ns %>"
+  },
+  "description": "<%= projectDescription %>",
+  "version": "0.1.0",
+  "debugMode": true,
   "private": true,
   "engines": {
     "node": ">=0.8.0"

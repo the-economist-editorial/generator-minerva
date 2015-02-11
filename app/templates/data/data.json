@@ -1,0 +1,11 @@
+{<% for(i=0;i<instances;i++) { %>
+  "<%= ns %>-<%= i %>" :
+  {
+    "title": "Instance <%= i %> of your widget",
+    "list": [
+      { "label": "First li element" },
+      { "label": "Second li element" }
+    ]
+  }<% if(i<instances-1){ %>,<% } 
+  } %>
+}
